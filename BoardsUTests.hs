@@ -1,8 +1,8 @@
-module Exp1UTests where
+module BoardsUTests where
 
 import Test.HUnit
 
-import Exp1
+import Boards
 
 {- Boards used in the tests -}
 

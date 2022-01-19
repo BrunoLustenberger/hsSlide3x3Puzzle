@@ -1,4 +1,4 @@
-module Exp1 where
+module Boards where
 
 import Data.List (elemIndex, foldl')
 import Data.Set (fromList, size)
