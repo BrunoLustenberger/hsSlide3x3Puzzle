@@ -1,3 +1,14 @@
+{- |
+Module : GeneralUtilsUTests
+Description : Unit tests for module GeneralUtils
+Copyright : (c) 2022 Bruno M.S. Lustenberger
+
+You can execute these tests from ghci by loading this module 
+and then enter e.g.:
+ghci> runTestTT st0 -- for a single testcase
+ghci> runTestTT outOfRangeTests -- for a group of testcases
+ghci> runTestTT allTestCases -- for all testcases 
+-}
 module GeneralUtilsUTests where
 
 import Test.HUnit

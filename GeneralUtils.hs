@@ -1,5 +1,11 @@
+{- |
+Module : GeneralUtils
+Description : General utilities
+Copyright : (c) 2022 Bruno M.S. Lustenberger
+-}
 module GeneralUtils where
 
+{- Lists -}
 
 -- |Test out of range for index of a list.
 outOfRange :: Int -> [a] -> Bool

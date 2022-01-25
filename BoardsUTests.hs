@@ -1,3 +1,14 @@
+{- |
+Module : BoardsUTests
+Description : Unit tests for module Boards
+Copyright : (c) 2022 Bruno M.S. Lustenberger
+
+You can execute these tests from ghci by loading this module 
+and then enter e.g.:
+ghci> runTestTT b00 -- for a single testcase
+ghci> runTestTT boardTests -- for a group of testcases
+ghci> runTestTT allTestCases -- for all testcases 
+-}
 module BoardsUTests where
 
 import Test.HUnit
@@ -24,8 +35,6 @@ board15 = [5,6,7,9,4,3,8,1,2]
 board16 = [5,6,9,1,4,3,8,7,2]
 board17 = [5,9,7,1,4,3,8,6,2]
 board18 = [9,6,7,1,4,3,8,5,2]
-
-
 
 
 {- Board -}

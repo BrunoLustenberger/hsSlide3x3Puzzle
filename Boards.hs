@@ -1,3 +1,22 @@
+{- |
+Module : Boards
+Description : Basic operations on a 3x3 board of tiles.
+Copyright : (c) 2022 Bruno M.S. Lustenberger
+
+The tiles on the board are marked with the digits 1..8.
+Digit 9 plays the role of the empty tile.
+
+A state of the game is represented by a list of 9 tiles.
+The first 3 tiles represent the top row, 
+the next 3 tiles the middle row, the last 3 the bottom row.
+The list has always length 9 and contains a permutation of 1..9
+
+The tile 9 can be swapped with the upper, lower, left or right neighbour,
+if present.
+
+The goal of the game is to achieve the "end state" 123/456/789.
+
+-}
 module Boards where
 
 import Data.List (elemIndex, foldl')
@@ -5,29 +24,19 @@ import Data.Set (fromList, size)
 
 import GeneralUtils (setListElem, swapListElems)
 
-{- 
+-- |The tiles
+type Tile = Int -- only 1..9
 
+-- |The boards
+type Board = [Tile]
 
--}
-
---  The tiles on the board are marked with the digits 1..8.
---  Digit 9 plays the role of the empty tile.
-type Value = Int -- only 1..9
-
--- |A state of the game is represented by a list of 9 values.
---  The first 3 values represent the top row, 
---  the next 3 values the middle row, the last 3 the bottom row.
---  The list has always length 9 and contains a permutation of 1..9
-type Board = [Value]
-
--- |Checks that the list satisfies the above restrictions.
+-- |Checks that the list satisfies the described restrictions.
 isBoard :: Board -> Bool
 isBoard b =
-    -- length b == 9 && .. not necessary
     filter (\ x -> x < 1 || x > 9) b == [] &&
     (size . fromList) b == 9 -- uniqueness and length
 
--- |The goal of the game is to achieve the "end state" 123/456/789.
+-- |The goal of the game.
 endBoard :: Board
 endBoard = [1 .. 9]
 
@@ -43,8 +52,8 @@ data Direction = Up | Dn | Lt | Rt deriving (Show, Eq)
 
 -- |All the directions in which 9 can move, given a certain Board
 possibleDirections :: Board -> [Direction]
-possibleDirections c = 
-    let p = pos9 c in
+possibleDirections b = 
+    let p = pos9 b in
     [] ++
     (if p > 2 then [Up] else []) ++
     (if p < 6 then [Dn] else []) ++    
