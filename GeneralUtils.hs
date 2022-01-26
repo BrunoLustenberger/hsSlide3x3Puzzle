@@ -26,3 +26,21 @@ swapListElems :: Int -> Int -> [a] -> [a]
 swapListElems i1 i2 xs
     | outOfRange i1 xs || outOfRange i2 xs   = xs
     | otherwise = setListElem i1 (xs !! i2) (setListElem i2 (xs !! i1) xs) 
+
+
+{- Loops as functions -}
+
+{- |Simulating a while loop, e.g. in python
+        x = init
+        while condition(x):
+            x = next(x)
+    Assuming, that the loop ends, this can be considered as a function 
+    that computes for each init value a finit value.
+-}
+whileLoop :: (a -> Bool) -> (a -> a) -> a -> a
+whileLoop condition next x = 
+    if condition x then whileLoop condition next (next x) 
+                   else x
+
+
+

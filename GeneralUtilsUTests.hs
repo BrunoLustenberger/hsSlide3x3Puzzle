@@ -15,7 +15,7 @@ import Test.HUnit
 
 import GeneralUtils
 
-{- lists -}
+{- Lists -}
 
 or0 = TestCase $ assertEqual "or0" (outOfRange 0 []) True 
 or1 = TestCase $ assertEqual "or1" (outOfRange 2 []) True 
@@ -46,6 +46,26 @@ sw3 = TestCase $ assertEqual "sw3" (swapListElems 2 0 [1,2,3]) [3,2,1]
 swapElemsTests = TestLabel "swapListElems" (TestList 
     [sw0,sw1,sw2,sw3])
 
+
+{- Loops as functions -}
+
+{-
+find the next multiple of 7
+x = 9
+while (x % 7 != 0):
+    x = x+1
+-}
+wlm7 :: Int -> Int
+wlm7 = whileLoop (\ x -> (x `mod` 7) /= 0) (\ x -> x+1)
+
+lf0 = TestCase $ assertEqual "lf0" (wlm7 9) 14
+lf1 = TestCase $ assertEqual "lf1" (wlm7 (-3)) 0
+
+loopsAsFunctionsTests = TestLabel "loopsAsFunctions" (TestList 
+    [lf0,lf1])
+
+
 {- all tests -}
 
-allTestCases = TestList [outOfRangeTests, setElemTests, swapElemsTests]
+allTestCases = TestList [outOfRangeTests, setElemTests, swapElemsTests,
+    loopsAsFunctionsTests]

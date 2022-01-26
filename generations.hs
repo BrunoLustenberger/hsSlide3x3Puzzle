@@ -4,12 +4,13 @@ import Data.List (sortBy)
 
 import Boards
 
+type Pedigree = [Direction] -- Most recent move at head of list
 -- |An extended board contains also the moves, by which it was generated.
 --  These moves can be considered as the pedigree of the board and the  
 --  endBoard as the prime ancestor. 
 data ExBoard = ExBoard {
       board :: Board
-    , pedigree :: [Direction] -- Most recent move at head of list 
+    , pedigree :: Pedigree 
     } deriving (Show, Eq)
 
 -- |Moves the board extending its pedigree
