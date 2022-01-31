@@ -61,8 +61,24 @@ wlm7 = whileLoop (\ x -> (x `mod` 7) /= 0) (\ x -> x+1)
 lf0 = TestCase $ assertEqual "lf0" (wlm7 9) 14
 lf1 = TestCase $ assertEqual "lf1" (wlm7 (-3)) 0
 
+{- factorial variants -}
+fact :: Int -> Int
+fact n = snd $ whileLoop (\ (x,res) -> x > 1) (\ (x,res) -> (x-1,x*res)) (n,1)
+{-  don't work, ?
+fact n = (snd . whileLoop) 
+        ((\ (x,res) -> x > 1)::(Int,Int)->Bool) 
+        ((\ (x,res) -> (x-1,x*res))::(Int,Int)->(Int,Int)) (n,1)
+-}
+lf2 = TestCase $ assertEqual "lf2" (fact 1) 1
+lf3 = TestCase $ assertEqual "lf3" (fact 0) 1
+lf4 = TestCase $ assertEqual "lf4" (fact (-4)) 1
+lf5 = TestCase $ assertEqual "lf5" (fact 2) 2
+lf6 = TestCase $ assertEqual "lf6" (fact 3) 6
+lf7 = TestCase $ assertEqual "lf7" (fact 5) 120
+lf8 = TestCase $ assertEqual "lf8" (fact 10) (product [1..10])
+
 loopsAsFunctionsTests = TestLabel "loopsAsFunctions" (TestList 
-    [lf0,lf1])
+    [lf0,lf1,lf2,lf3,lf4,lf5,lf6,lf7,lf8])
 
 
 {- all tests -}

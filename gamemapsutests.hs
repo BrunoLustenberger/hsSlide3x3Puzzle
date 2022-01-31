@@ -97,6 +97,28 @@ st11 = TestCase $ assertEqual "st11" (boardMap finitGameMapBuildState)
 gmbsTests = TestLabel "gmbs" (TestList 
     [st1,st2,st3,st10,st11])
 
+
+{- lookup and solve -}
+
+ls00  = TestCase $ assertEqual "ls00" (lookupBoard [1,2,3,4,5,6,7,8,9]) 
+    (Just [])
+ls00' = TestCase $ assertEqual "ls00'" (solveBoard [1,2,3,4,5,6,7,8,9])
+    (Just [])
+ls01  = TestCase $ assertEqual "ls01" (lookupBoard [1,2,3,4,5,6,7,9,8]) 
+    (Just [Lt])
+ls01'  = TestCase $ assertEqual "ls01'" (solveBoard [1,2,3,4,5,6,7,9,8]) 
+    (Just [Rt])
+ls02  = TestCase $ assertEqual "ls02" (lookupBoard [1,2,3,4,6,9,7,5,8]) 
+    (Just [Rt,Up,Lt])
+ls02' = TestCase $ assertEqual "ls02'" (solveBoard [1,2,3,4,6,9,7,5,8]) 
+    (Just [Lt,Dn,Rt])
+
+lookupSolveTests = TestLabel "lookupSolve" (TestList 
+    [ls00,ls01,ls01',ls02,ls02'])
+
+
 {- all tests -}
 
-allTestCases = TestList [gmbsTests]
+allTestCases = TestList [gmbsTests, lookupSolveTests]
+
+

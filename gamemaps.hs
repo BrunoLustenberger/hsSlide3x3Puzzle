@@ -69,13 +69,23 @@ allStates = initGameMapBuildState : next allStates
 
 -- |The sizes of the generations and maps
 allSizes :: [(Int, Int)]
-allSizes = map (\ x -> ((length . generation) x, (M.size . boardMap) x)) allStates
+allSizes = map (\ x -> ((length . generation) x, (M.size . boardMap) x)) 
+           allStates
 
-
-
-{-
+-- |Finds a board in the map, if present
 lookupBoard :: Board -> Maybe Pedigree
 lookupBoard board = M.lookup board gameMap 
 
--}
+-- |Reverses a single direction
+reverseDir :: Direction -> Direction
+reverseDir d
+    | d == Up  = Dn
+    | d == Dn  = Up
+    | d == Lt  = Rt
+    | d == Rt  = Lt
+
+-- |Returns the list of moves, that turn the board into the endBoard
+--  First move is head of the list
+solveBoard :: Board -> Maybe [Direction]
+solveBoard = ((fmap . map) reverseDir) . lookupBoard
 
