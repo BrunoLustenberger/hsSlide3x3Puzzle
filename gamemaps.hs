@@ -89,3 +89,7 @@ reverseDir d
 solveBoard :: Board -> Maybe [Direction]
 solveBoard = ((fmap . map) reverseDir) . lookupBoard
 
+-- |A simple example of an impossible board, 
+--  i.e. it cannot be reached from endBoard
+endBoard' :: Board
+endBoard' = [1,2,3,4,5,6,8,7,9]

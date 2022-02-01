@@ -112,9 +112,13 @@ ls02  = TestCase $ assertEqual "ls02" (lookupBoard [1,2,3,4,6,9,7,5,8])
     (Just [Rt,Up,Lt])
 ls02' = TestCase $ assertEqual "ls02'" (solveBoard [1,2,3,4,6,9,7,5,8]) 
     (Just [Lt,Dn,Rt])
+ls03  = TestCase $ assertEqual "ls03" (lookupBoard endBoard') 
+    Nothing
+ls03' = TestCase $ assertEqual "ls03'" (solveBoard endBoard') 
+    Nothing
 
 lookupSolveTests = TestLabel "lookupSolve" (TestList 
-    [ls00,ls01,ls01',ls02,ls02'])
+    [ls00,ls01,ls01',ls02,ls02',ls03,ls03'])
 
 
 {- all tests -}

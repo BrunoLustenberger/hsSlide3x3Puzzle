@@ -18,10 +18,20 @@ instance Arbitrary Direction where
         n <- arbitrary
         return (int2Dir n)
 
+moves' :: Board -> [Direction] -> Board
+moves' = flip moves
+
+moves'' :: Board -> Maybe [Direction] -> Maybe Board
+moves'' board = fmap (moves' board)
+
 -- |solve any board reachable from endBoard
 propXXX :: [Direction] -> Bool
-propXXX ds = moves'' (solveBoard board) == Just endBoard where 
+propXXX ds = moves'' board (solveBoard board) == Just endBoard where 
     board = moves ds endBoard
-    moves' = flip moves
-    moves'' = fmap (moves' board)
+
+-- |solve any board not reachable from endBoard
+propYYY :: [Direction] -> Bool
+propYYY ds = moves'' board (solveBoard board) == Nothing where 
+    board = moves ds endBoard'
+
 
