@@ -1,3 +1,15 @@
+{- |
+Module : GameMapsUTests
+Description : Unit testcases for module GameMaps
+Copyright : (c) 2022 Bruno M.S. Lustenberger
+
+You can run these unit testcases from ghci by loading this module 
+and using the command runTestTT,e.g.
+
+> runTestTT st1 -- for a single test case
+> runTestTT gmbsTests -- for a group of test cases
+> runTestTT allTestCases -- for all test cases
+-}
 module GameMapsUTests where
 
 import Test.HUnit
@@ -7,16 +19,16 @@ import Boards
 import Generations
 import GameMaps
 
-{- GameMapBuildState -}
+{- GameMapBuildStep -}
 
-state1 = nextState initGameMapBuildState
-state2 = nextState state1
-state3 = nextState state2
+step1 = nextStep initGameMapBuildStep
+step2 = nextStep step1
+step3 = nextStep step2
 
 -- see also the values in GenerationsUTests
 
-st1 = TestCase $ assertEqual "st1" state1
-    GameMapBuildState 
+st1 = TestCase $ assertEqual "st1" step1
+    GameMapBuildStep 
         {
             generation = 
             [  ExBoard [1,2,3,4,5,6,7,9,8] [Lt], 
@@ -29,8 +41,8 @@ st1 = TestCase $ assertEqual "st1" state1
             ]
         }
 
-st2 = TestCase $ assertEqual "st2" state2
-    GameMapBuildState 
+st2 = TestCase $ assertEqual "st2" step2
+    GameMapBuildStep 
         {
             generation = 
             [   -- ExBoard [1,2,3,4,5,6,7,8,9] [Rt,Lt], 
@@ -51,8 +63,8 @@ st2 = TestCase $ assertEqual "st2" state2
             ]
         }
 
-st3 = TestCase $ assertEqual "st3" state3
-    GameMapBuildState 
+st3 = TestCase $ assertEqual "st3" step3
+    GameMapBuildStep 
         {
             generation = 
             [   -- ExBoard [1,2,3,4,5,6,7,9,8] [Lt,Rt,Lt],
@@ -88,10 +100,10 @@ st3 = TestCase $ assertEqual "st3" state3
             ]
         }
 
-st10 = TestCase $ assertEqual "st10" finitGameMapBuildState
-    ( (head . (dropWhile (not . isEndState))) allStates )
-st11 = TestCase $ assertEqual "st11" (boardMap finitGameMapBuildState)
-    ( boardMap ((last . (takeWhile (not . isEndState))) allStates) )
+st10 = TestCase $ assertEqual "st10" finitGameMapBuildStep
+    ( (head . (dropWhile (not . isEndStep))) allSteps )
+st11 = TestCase $ assertEqual "st11" (boardMap finitGameMapBuildStep)
+    ( boardMap ((last . (takeWhile (not . isEndStep))) allSteps) )
 
 
 gmbsTests = TestLabel "gmbs" (TestList 

@@ -36,6 +36,7 @@ swapListElems i1 i2 xs
             x = next(x)
     Assuming, that the loop ends, this can be considered as a function 
     that computes for each init value a finit value.
+    Note that the type of x can be arbitrarily complex.
 -}
 whileLoop :: (a -> Bool) -> (a -> a) -> a -> a
 whileLoop condition next x = 

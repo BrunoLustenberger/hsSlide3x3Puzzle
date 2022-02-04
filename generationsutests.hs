@@ -1,3 +1,15 @@
+{- |
+Module : GenerationsUTests
+Description : Unit testcases for module Generations
+Copyright : (c) 2022 Bruno M.S. Lustenberger
+
+You can run these unit testcases from ghci by loading this module 
+and using the command runTestTT,e.g.
+
+> runTestTT ch00 -- for a single test case
+> runTestTT childrenTests -- for a group of test cases
+> runTestTT allTestCases -- for all test cases
+-}
 module GenerationsUTests where
 
 import Test.HUnit

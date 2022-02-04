@@ -15,9 +15,19 @@ The tile 9 can be swapped with the upper, lower, left or right neighbour,
 if present.
 
 The goal of the game is to achieve the "end state" 123/456/789.
-
 -}
-module Boards where
+module Boards
+{- Uncomment for tests
+    ( Tile
+    , Board
+    , endBoard
+    , Direction (..)
+    , possibleDirections
+    , move
+    , moves
+    )
+     -}
+where
 
 import Data.List (elemIndex, foldl')
 import Data.Set (fromList, size)
