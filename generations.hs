@@ -14,7 +14,7 @@ For each board within a generation the sequence of moves, that generates this
 board, is preserved. To achieve this, we extend the type Board.
 
 Within a generation there may be several boards with identical tile positions.
-Such duplicates are eliminated, to achieve this, we first sort each generation.
+Such duplicates are eliminated. To achieve this, we first sort each generation.
 -}
 module Generations
 {- Uncomment for tests 

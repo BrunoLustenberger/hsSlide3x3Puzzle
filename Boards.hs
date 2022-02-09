@@ -31,8 +31,11 @@ where
 
 import Data.List (elemIndex, foldl')
 import Data.Set (fromList, size)
+import Data.Char (ord)
 
 import GeneralUtils (setListElem, swapListElems)
+
+{- 1. Operations for the algorithm -}
 
 -- |The tiles
 type Tile = Int -- only 1..9
@@ -60,7 +63,7 @@ pos9 b = maybe (error "invalid Board") id (elemIndex 9 b)
 -- |9 can move up,down,left,right
 data Direction = Up | Dn | Lt | Rt deriving (Show, Eq)
 
--- |All the directions in which 9 can move, given a certain Board
+-- |All directions in which 9 can move, given a certain Board
 possibleDirections :: Board -> [Direction]
 possibleDirections b = 
     let p = pos9 b in
@@ -85,3 +88,17 @@ move d b
 --  The moves are executed from left to right
 moves :: [Direction] -> Board -> Board
 moves ds b = foldl' (flip move) b ds
+
+{- 2. Helper functions for IO -}
+
+-- |Compact representation of a board
+board2Str :: Board -> String
+board2Str = undefined
+
+-- |Board from compact representation
+str2Board :: String -> Maybe Board
+str2Board str =
+    if isBoard b then Just b else Nothing 
+    where b = map (\ c -> ord c - ord '0') str
+
+

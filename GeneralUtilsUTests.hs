@@ -77,6 +77,9 @@ lf6 = TestCase $ assertEqual "lf6" (fact 3) 6
 lf7 = TestCase $ assertEqual "lf7" (fact 5) 120
 lf8 = TestCase $ assertEqual "lf8" (fact 10) (product [1..10])
 
+--  Only tested interactively
+testSimpleDialogLoop = simpleDialogLoop simpleDialogExample
+
 loopsAsFunctionsTests = TestLabel "loopsAsFunctions" (TestList 
     [lf0,lf1,lf2,lf3,lf4,lf5,lf6,lf7,lf8])
 

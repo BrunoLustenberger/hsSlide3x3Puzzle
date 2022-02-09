@@ -43,5 +43,25 @@ whileLoop condition next x =
     if condition x then whileLoop condition next (next x) 
                    else x
 
+-- |A dialog with a user. The dialog returns True 
+--  iff after completion a next dialog should be done. 
+type SimpleDialog = IO Bool
+
+simpleDialogExample :: IO Bool
+simpleDialogExample = do
+    putStrLn "type anything, q means quit"
+    str <- getLine
+    if str == "q" then return False
+                  else do
+                      putStrLn ("simulating " ++ str)
+                      return True
+
+{- |Simple dialog loop via stdin, stdout -}
+simpleDialogLoop :: SimpleDialog -> IO ()
+simpleDialogLoop simpleDialog = do
+    continue <- simpleDialog
+    if continue then simpleDialogLoop simpleDialog
+                else return () 
+
 
 

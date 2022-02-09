@@ -124,7 +124,7 @@ solveBoard = ((fmap . map) reverseDir) . lookupBoard
 -- |The size of the entire map
 gameMapSize = M.size gameMap
 
--- |All states, as an infinite sequence
+-- |All steps, as an infinite sequence
 allSteps :: [GameMapBuildStep]
 allSteps = initGameMapBuildStep : next allSteps
   where
