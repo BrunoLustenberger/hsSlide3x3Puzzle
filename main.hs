@@ -21,42 +21,54 @@ import GeneralUtils (simpleDialogLoop, SimpleDialog)
 import GameMaps
 import Boards
 
-prompt = ".."
+prompt = ">"
+help   = "s board\n" ++
+         "    to solve a board\n" ++
+         "    board is entered e.g. like so: 123456978\n" ++
+         "h\n" ++
+         "    for help\n" ++
+         "q\n" ++
+         "    to quit"
 
 data Command = 
       Solve Board 
-    | Shuffle [Direction] 
---    | Verbose Boolean 
     | Quit 
+    | Help
     | Invalid String
+--    | Shuffle [Direction] 
+--    | Verbose Boolean 
 
 decodeCommand :: String -> Command
 decodeCommand str = 
-    let ws = words str in
-    case ws of 
+    case words str of 
         ["q"] -> Quit
 {-
         ["s",ts] -> maybe (Invalid "Input string is not a board") 
                           (\ b -> Solve b) (str2Board ts) 
 -}        
         ["s",ts] -> case str2Board ts of
-                        Just b  -> Solve b
-                        Nothing -> Invalid "Input string is not a board"
-        otherwise -> Invalid "invalid input or not yet implemented"
+            Just b  -> Solve b
+            Nothing -> Invalid "Input string is not a board"
+        "h":s -> Help
+        "?":s -> Help
+        otherwise -> Invalid "invalid input, type h for help"
 
 simpleDialog :: SimpleDialog
 simpleDialog = do
-    putStrLn prompt
+    putStrLn ""
+    putStr prompt
     str <- getLine
     let command = decodeCommand str
     case command of
         Solve b -> do
-            (putStrLn . show . solveBoard) b
-            return True
-        Shuffle ds -> do
-            putStrLn ("simulating ....")
+            -- (putStrLn . show . solveBoard) b
+            let res = maybe "impossible board" (\ ds -> show ds) (solveBoard b)
+            putStrLn res
             return True
         Quit -> return False
+        Help -> do
+            putStrLn help
+            return True
         Invalid s -> do
             putStrLn s
             return True

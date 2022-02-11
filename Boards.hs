@@ -61,7 +61,7 @@ pos9 :: Board -> Position
 pos9 b = maybe (error "invalid Board") id (elemIndex 9 b) 
 
 -- |9 can move up,down,left,right
-data Direction = Up | Dn | Lt | Rt deriving (Show, Eq)
+data Direction = Up | Dn | Lt | Rt deriving (Show, Eq, Read)
 
 -- |All directions in which 9 can move, given a certain Board
 possibleDirections :: Board -> [Direction]
