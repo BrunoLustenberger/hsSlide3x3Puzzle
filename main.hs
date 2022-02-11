@@ -21,7 +21,7 @@ import GeneralUtils (simpleDialogLoop, SimpleDialog)
 import GameMaps
 import Boards
 
-prompt = ">"
+prompt = "> "
 help   = "s board\n" ++
          "    to solve a board\n" ++
          "    board is entered e.g. like so: 123456978\n" ++
@@ -61,8 +61,9 @@ simpleDialog = do
     let command = decodeCommand str
     case command of
         Solve b -> do
-            -- (putStrLn . show . solveBoard) b
-            let res = maybe "impossible board" (\ ds -> show ds) (solveBoard b)
+            let res = case solveBoard b of
+                    Nothing -> "Impossible board"
+                    Just ds -> dirs2Str ds ++ "\n" ++ showMoves b ds
             putStrLn res
             return True
         Quit -> return False

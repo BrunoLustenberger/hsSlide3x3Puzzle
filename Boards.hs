@@ -84,7 +84,7 @@ move d b
     | d == Rt   = swapListElems p9 (p9+1) b
     where p9 = pos9 b
 
--- |Executes a series of moves. 
+-- |Executes a sequence of moves. 
 --  The moves are executed from left to right
 moves :: [Direction] -> Board -> Board
 moves ds b = foldl' (flip move) b ds
@@ -93,7 +93,7 @@ moves ds b = foldl' (flip move) b ds
 
 -- |Compact representation of a board
 board2Str :: Board -> String
-board2Str = undefined
+board2Str = map (\ n -> (head . show) n)
 
 -- |Board from compact representation
 str2Board :: String -> Maybe Board
@@ -101,4 +101,30 @@ str2Board str =
     if isBoard b then Just b else Nothing 
     where b = map (\ c -> ord c - ord '0') str
 
+-- |Compact representation of a direction
+dir2Str :: Direction -> String
+dir2Str Up = "U"
+dir2Str Dn = "D"
+dir2Str Lt = "L"
+dir2Str Rt = "R"
+
+-- |Compact representation of a sequence of directions
+dirs2Str :: [Direction] -> String   
+dirs2Str = concat . ( map dir2Str )
+
+-- |Dir from compact representation
+str2Dir :: String -> Maybe Direction
+str2Dir = undefined
+
+-- |Dirs from compact representation
+str2Dirs :: String -> Maybe [Direction]
+str2Dirs = undefined
+
+-- |Shows changes of a board by a sequence of moves
+showMoves :: Board -> [Direction] -> String 
+showMoves b = fst . ( foldl' appendMove (board2Str b, b) ) where
+    appendMove :: (String,Board) -> Direction -> (String,Board)
+    appendMove (s,b) d = (s',b') where
+        b' = move d b
+        s' = s ++ " " ++ (dir2Str d) ++ "\n" ++ (board2Str b')
 
