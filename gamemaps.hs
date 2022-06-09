@@ -29,18 +29,19 @@ The solution for this board is
     [Rt,Dn,Lt,Up,Rt,Dn,Dn,Rt]   (first move at head)
 
 The map also shows that not every permutation of (1,2,3,4,5,6,7,8,9) 
-represents a board that can be generated fromthe endBoard. It contains only
+represents a board that can be generated from the endBoard. It contains only
 181440 boards, i.e. half of 9! = 362880.
 
 Furthermore, the longest pedigree has 31 moves. Thus every valid board
 can be solved with at most 31 moves.
 -}
 module GameMaps
-{- Uncomment for tests
+{- Uncomment export list for tests
+-}
     ( solveBoard
     , gameMapSize
     , maxPedigreeLength
-    ) -}
+    )
 where
 
 import qualified Data.Map as M

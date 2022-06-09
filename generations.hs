@@ -17,7 +17,8 @@ Within a generation there may be several boards with identical tile positions.
 Such duplicates are eliminated. To achieve this, we first sort each generation.
 -}
 module Generations
-{- Uncomment for tests 
+{- Uncomment export list for tests 
+-}
     ( Pedigree
     , ExBoard(..)
     , exEndBoard
@@ -25,7 +26,7 @@ module Generations
     , nextGen
     , sortGen
     , compressGen
-    )-}
+    )
 where
 
 import Data.List (sortBy)

@@ -65,8 +65,8 @@ module Main (
 import System.IO (stdout, hFlush)
 
 import GeneralUtils (simpleDialogLoop, SimpleDialog)
-import GameMaps
-import Boards
+import GameMaps (solveBoard, gameMapSize)
+import Boards (Board, str2Board, dirs2Str, showMoves)
 
 prompt = "> "
 help   = "s board\n" ++
@@ -126,7 +126,7 @@ simpleDialog = do
 main :: IO ()
 main = do
     putStr "Generating map .. "
-    let s = gameMapSize
+    let s = gameMapSize -- this will also generate the map
     putStrLn (show s ++ " boards")
     simpleDialogLoop simpleDialog
 

@@ -11,13 +11,19 @@ The first 3 tiles represent the top row,
 the next 3 tiles the middle row, the last 3 the bottom row.
 The list has always length 9 and contains a permutation of 1..9
 
+Example:
+346
+758    is represented by [3,4,6,7,5,8,9,1,2]
+ 12
+
 The tile 9 can be swapped with the upper, lower, left or right neighbour,
 if present.
 
 The goal of the game is to achieve the "end state" 123/456/789.
 -}
 module Boards
-{- Uncomment for tests
+{- Uncomment export list for tests
+-}
     ( Tile
     , Board
     , endBoard
@@ -25,8 +31,10 @@ module Boards
     , possibleDirections
     , move
     , moves
+    , str2Board
+    , dirs2Str  
+    , showMoves
     )
-     -}
 where
 
 import Data.List (elemIndex, foldl')
